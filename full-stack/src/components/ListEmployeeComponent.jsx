@@ -70,9 +70,14 @@ const ListEmployeeComponent = () => {
                             <td>{employee.lastName}</td>
                             <td>{employee.email}</td>
                             <th>
-                                <button className='btn btn-success' onClick={()=>updateEmployee(employee.id)}>Update</button>
-                                <button className='btn btn-danger' onClick={()=>removeEmployee(employee.id)}>Delete</button>
-                                <a className='btn btn-secondary' href="http://">View</a>
+                                <button className='btn btn-success' onClick={()=>updateEmployee(employee.id)}>
+                                Update
+                                </button>
+                                <button className='btn btn-danger' onClick={()=>removeEmployee(employee.id)}
+                                style={{marginLeft:'12px'}}>
+                                Delete
+                                </button>
+                                <a className='btn btn-secondary' href="http://" style={{marginLeft:'12px'}}>View</a>
 
                             </th>
                             </tr>
