@@ -16,13 +16,11 @@ const HeaderComponent = () => {
                     <Link className="nav-link text-light active" aria-current="page" to="/">Employees</Link>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link text-light" href="#">Add employee</a>
+                    <a className="nav-link text-light" href="list-department">Departments</a>
                     </li>
-                    <li className="nav-item">
-                    <a className="nav-link text-light">Status</a>
-                    </li>
+                    
                 </ul>
-                    <Link className="btn btn-outline-light" to="#">Add User</Link>
+                    <Link className="btn btn-outline-light" to="#">Logout</Link>
                 </div>
             </div>
             </nav>
