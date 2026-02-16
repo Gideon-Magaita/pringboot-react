@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {listDepartments} from '../services/Departmentservice'
+import {listDepartments,deleteDepartment} from '../services/Departmentservice'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -13,7 +13,6 @@ const ListDepartmentComponent = () => {
      getAllDepartments()
   },[])
 
-
   function getAllDepartments(){
     listDepartments().then((response)=>{
         setDepartment(response.data);
@@ -26,21 +25,19 @@ const ListDepartmentComponent = () => {
     navigate('/department');
   }
 
-//   function updateEmployee(id){ 
-//     navigate(`/edit-employee/${id}`);
-//   }
+  function updateDepartment(id){ 
+    navigate(`/edit-department/${id}`);
+  }
 
+  function removeDepartment(id){
+    deleteDepartment(id).then((response)=>{
+    getAllDepartments()
+    navigate('/list-department')
 
-//   function removeEmployee(id){
-//     deleteEmployee(id).then((response)=>{
-//     getAllDepartments()
-//     navigate('/')
-
-//     }).catch(error=>{
-//         console.error(error);
-//     })
-//   }
-
+    }).catch(error=>{
+        console.error(error);
+    })
+  }
 
   return (
     <div>
@@ -68,10 +65,10 @@ const ListDepartmentComponent = () => {
                             <td>{department.departmentName}</td>
                             <td>{department.departmentDescription}</td>
                             <th>
-                                <button className='btn btn-success' onClick={'/'}>
+                                <button className='btn btn-success' onClick={()=>updateDepartment(department.id)}>
                                 Update
                                 </button>
-                                <button className='btn btn-danger' onClick={'/'}
+                                <button className='btn btn-danger' onClick={()=>removeDepartment(department.id)}
                                 style={{marginLeft:'12px'}}>
                                 Delete
                                 </button>
