@@ -3,6 +3,7 @@ import {listDepartments,deleteDepartment} from '../services/Departmentservice'
 import { useNavigate } from 'react-router-dom'
 
 
+
 const ListDepartmentComponent = () => {
 
   const navigate = useNavigate();
