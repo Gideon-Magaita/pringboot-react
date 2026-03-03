@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {listDepartments,deleteDepartment} from '../services/Departmentservice'
+import {listDepartments,deleteDepartment} from '../services/DepartmentService'
 import { useNavigate } from 'react-router-dom'
 
 

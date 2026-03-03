@@ -1,9 +1,11 @@
 package com.backend.employee.service.impl;
 
 import com.backend.employee.dto.EmployeeDto;
+import com.backend.employee.entity.Department;
 import com.backend.employee.entity.Employee;
 import com.backend.employee.exception.ResourceNotFoundException;
 import com.backend.employee.mapper.EmployeeMapper;
+import com.backend.employee.repository.DepartmentRepository;
 import com.backend.employee.repository.EmployeeRepository;
 import com.backend.employee.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -19,10 +21,19 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private DepartmentRepository departmentRepository;
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
+
+        //inject department to add employee logic
+        Department department = departmentRepository.findById(employeeDto.getDepartmentId())
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Department with the given id does not found"+employeeDto.getDepartmentId()));
+        employee.setDepartment(department);
+        //end injecting
+
         Employee savedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
@@ -52,6 +63,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setFirstName(updateEmployee.getFirstName());
         employee.setLastName(updateEmployee.getLastName());
         employee.setEmail(updateEmployee.getEmail());
+
+        //inject department to add employee logic
+        Department department = departmentRepository.findById(updateEmployee.getDepartmentId())
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Department with the given id does not found"+updateEmployee.getDepartmentId()));
+        employee.setDepartment(department);
+        //end injecting
+
         Employee updatedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
     }
